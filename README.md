@@ -1,5 +1,23 @@
 ﻿# LS.Store
 
+ Db design:
+ 
+Categories -1---M-> Products
+Customers -1---M-> Orders
+Orders ---1---M-> OrderDetails
+Orders ---1---1-> Invoice
+
+Products -1---M-> Transactions
+
+
+Customers -1---M-> Transactions
+
+ProductInventory ---1---1-> Product
+![enter image description here](https://i.yourimageshare.com/QLc99WukNx.webp)
+
+
+
+
 ## Build
 
 Run `dotnet build -tl` to build the solution.
