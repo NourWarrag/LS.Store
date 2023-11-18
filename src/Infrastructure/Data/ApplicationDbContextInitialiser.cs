@@ -109,10 +109,10 @@ public class ApplicationDbContextInitialiser
 
             _context.Categories.AddRange(new List<Category>
             {
-               new Category{ Name = "Body" },
-               new Category{ Name = "Lenses" },
-               new Category{ Name = "Lights" },
-               new Category{ Name = "Stabilizers" },
+               new() { Name = "Body" },
+               new() { Name = "Lenses" },
+               new() { Name = "Lights" },
+               new() { Name = "Stabilizers" },
 
             });
 

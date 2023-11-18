@@ -24,9 +24,9 @@ public class GetProductsWithPaginationQueryHandler : IRequestHandler<GetProducts
     public async Task<PaginatedList<ProductDto>> Handle(GetProductsWithPaginationQuery request, CancellationToken cancellationToken)
     {
         return await _context.Products
-            .Where(x => x.ListId == request.ListId)
-            .OrderBy(x => x.Title)
-            .ProjectTo<ProductBriefDto>(_mapper.ConfigurationProvider)
+            .Where(x => x.CategoryId == request.CategoryId)
+            .OrderBy(x => x.Created)
+            .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);
     }
 }

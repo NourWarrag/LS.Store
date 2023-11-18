@@ -5,12 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LS.Store.Domain.Events;
-public class ProductCreatedEvent : BaseEvent
+public class ProductCreatedEvent(Product entity) : BaseEvent
 {
-    public ProductCreatedEvent(Product entity)
-    {
-        Entity = entity;
-    }
-
-    public Product Entity { get; }
+    public Product Entity { get; } = entity;
 }

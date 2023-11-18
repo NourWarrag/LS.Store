@@ -5,7 +5,7 @@ using LS.Store.Domain.Events;
 namespace LS.Store.Application.Products.Commands.CreateProduct;
 
 public record CreateProductCommand : IRequest<long>
-{
+{ 
     public string? SKU { get; set; }
     public string? Name { get; set; }
     public string Description { get; set; } = string.Empty;
@@ -22,6 +22,7 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
     {
         RuleFor(v => v.SKU)
             .NotEmpty();
+
         RuleFor(v => v.Name)
             .NotEmpty()
             .MaximumLength(200);
