@@ -3,7 +3,7 @@
 namespace LS.Store.Application.Products.Queries;
 public class ProductDto
 {
-    public int Id { get; init; }
+    public long Id { get; init; }
 
     public string? SKU { get; set; }
     public string? Name { get; set; }

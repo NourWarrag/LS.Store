@@ -21,16 +21,10 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
-    <PackageReference Include="NSwag.AspNetCore" />
-    <PackageReference Include="NSwag.MSBuild">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="FluentValidation.AspNetCore" />
-    <PackageReference Include="ZymLabs.NSwag.FluentValidation.AspNetCore" />
+    <PackageReference Include="Swashbuckle.AspNetCore" />
   </ItemGroup>
-
-
+  
    <!--Auto-generated Open API specification--> 
   <!--<PropertyGroup>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>

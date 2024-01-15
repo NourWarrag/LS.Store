@@ -14,6 +14,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseSwagger();
+    app.UseSwaggerUI();
     await app.InitialiseDatabaseAsync();
 }
 else
@@ -26,11 +28,6 @@ app.UseHealthChecks("/health");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseSwaggerUi3(settings =>
-{
-    settings.Path = "/api";
-    settings.DocumentPath = "/api/specification.json";
-});
 
 app.MapControllerRoute(
     name: "default",
@@ -38,13 +35,15 @@ app.MapControllerRoute(
 
 app.MapRazorPages();
 
-app.MapFallbackToFile("index.html");
+//app.MapFallbackToFile("/swagger/index.html");
 
 app.UseExceptionHandler(options => { });
 
 app.Map("/", () => Results.Redirect("/api"));
 
 app.MapEndpoints();
+
+app.MapGet("/hello", () => "Hello world").WithOpenApi();
 
 app.Run();
 

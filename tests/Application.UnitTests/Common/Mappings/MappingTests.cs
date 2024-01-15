@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 using AutoMapper;
 using LS.Store.Application.Common.Interfaces;
 using LS.Store.Application.Common.Models;
+using LS.Store.Application.Products.Queries;
 using LS.Store.Application.TodoItems.Queries.GetTodoItemsWithPagination;
 using LS.Store.Application.TodoLists.Queries.GetTodos;
 using LS.Store.Domain.Entities;
@@ -33,7 +34,7 @@ public class MappingTests
     [TestCase(typeof(TodoItem), typeof(TodoItemDto))]
     [TestCase(typeof(TodoList), typeof(LookupDto))]
     [TestCase(typeof(TodoItem), typeof(LookupDto))]
-    [TestCase(typeof(TodoItem), typeof(ProductDto))]
+    [TestCase(typeof(TodoItem), typeof(TodoItemBriefDto))]
     public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
     {
         var instance = GetInstanceOf(source);

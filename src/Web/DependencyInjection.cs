@@ -3,16 +3,20 @@ using LS.Store.Application.Common.Interfaces;
 using LS.Store.Infrastructure.Data;
 using LS.Store.Web.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
 
-using NSwag;
-using NSwag.Generation.Processors.Security;
-using ZymLabs.NSwag.FluentValidation;
+
 
 namespace Microsoft.Extensions.DependencyInjection;
 public static class DependencyInjection
 {
     public static IServiceCollection AddWebServices(this IServiceCollection services)
     {
+        services.AddControllers();
+        services.AddEndpointsApiExplorer();
+        services.AddSwaggerGen();
+
+
         services.AddDatabaseDeveloperPageExceptionFilter();
 
         services.AddScoped<IUser, CurrentUser>();
@@ -26,41 +30,11 @@ public static class DependencyInjection
 
         services.AddRazorPages();
 
-        services.AddScoped(provider =>
-        {
-            var validationRules = provider.GetService<IEnumerable<FluentValidationRule>>();
-            var loggerFactory = provider.GetService<ILoggerFactory>();
-
-            return new FluentValidationSchemaProcessor(provider, validationRules, loggerFactory);
-        });
-
         // Customise default API behaviour
         services.Configure<ApiBehaviorOptions>(options =>
             options.SuppressModelStateInvalidFilter = true);
 
-        services.AddEndpointsApiExplorer();
-
-        services.AddOpenApiDocument((configure, sp) =>
-        {
-            configure.Title = "LS.Store API";
-
-            // Add the fluent validations schema processor
-            var fluentValidationSchemaProcessor =
-                sp.CreateScope().ServiceProvider.GetRequiredService<FluentValidationSchemaProcessor>();
-
-            configure.SchemaProcessors.Add(fluentValidationSchemaProcessor);
-
-            // Add JWT
-            configure.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
-            {
-                Type = OpenApiSecuritySchemeType.ApiKey,
-                Name = "Authorization",
-                In = OpenApiSecurityApiKeyLocation.Header,
-                Description = "Type into the textbox: Bearer {your JWT token}."
-            });
-
-            configure.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
-        });
+        
 
         return services;
     }
