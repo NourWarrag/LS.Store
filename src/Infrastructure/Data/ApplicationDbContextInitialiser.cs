@@ -118,5 +118,30 @@ public class ApplicationDbContextInitialiser
 
             await _context.SaveChangesAsync();
         }
+
+        if (!_context.Products.Any())
+        {
+            //initialise products
+            _context.Products.AddRange(new List<Product>
+            {
+                Product.ProductBuilder("B001", "Body 1", "Body 1", 1000, 1, 10),
+                Product.ProductBuilder("B002", "Body 2", "Body 2", 2000, 1, 10),
+                Product.ProductBuilder("B003", "Body 3", "Body 3", 3000, 1, 10),
+                Product.ProductBuilder("B004", "Body 4", "Body 4", 4000, 1, 10),
+                Product.ProductBuilder("B005", "Body 5", "Body 5", 5000, 1, 10),
+                Product.ProductBuilder("B006", "Body 6", "Body 6", 6000, 1, 10),
+                Product.ProductBuilder("B007", "Body 7", "Body 7", 7000, 1, 10),
+                Product.ProductBuilder("B008", "Body 8", "Body 8", 8000, 1, 10),
+                Product.ProductBuilder("B009", "Body 9", "Body 9", 9000, 1, 10),
+                Product.ProductBuilder("B010", "Body 10", "Body 10", 10000, 1, 10),
+                Product.ProductBuilder("B011", "Body 11", "Body 11", 11000, 1, 10),
+                Product.ProductBuilder("B012", "Body 12", "Body 12", 12000, 1, 10),
+                Product.ProductBuilder("B013", "Body 13", "Body 13", 13000, 1, 10),
+                Product.ProductBuilder("B014", "Body 14", "Body 14", 14000, 1, 10),
+                Product.ProductBuilder("B015", "Body 15", "Body 15", 15000, 1, 10),
+                Product.ProductBuilder("B016", "Body 16", "Body 16", 16000, 1, 10),
+                Product.ProductBuilder("B017", "Body 17", "Body 17", 17000, 1, 10)
+            });
+        }
     }
 }

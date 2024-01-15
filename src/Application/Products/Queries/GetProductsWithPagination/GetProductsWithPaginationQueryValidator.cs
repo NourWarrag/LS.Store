@@ -7,12 +7,15 @@ public class GetProductsWithPaginationQueryValidator : AbstractValidator<GetProd
     public GetProductsWithPaginationQueryValidator()
     {
         RuleFor(x => x.CategoryId)
-            .GreaterThan(0);
+            .Must(categoryId => categoryId == null || categoryId > 0)
+            .WithMessage("CategoryId must be null or greater than 0.");
 
         RuleFor(x => x.PageNumber)
-            .GreaterThanOrEqualTo(1).WithMessage("PageNumber at least greater than or equal to 1.");
+            .GreaterThanOrEqualTo(1)
+            .WithMessage("PageNumber must be greater than or equal to 1.");
 
         RuleFor(x => x.PageSize)
-            .GreaterThanOrEqualTo(1).WithMessage("PageSize at least greater than or equal to 1.");
+            .GreaterThanOrEqualTo(1)
+            .WithMessage("PageSize must be greater than or equal to 1.");
     }
 }

@@ -5,7 +5,7 @@ using LS.Store.Application.Common.Models;
 namespace LS.Store.Application.Products.Queries.GetProductsWithPagination;
 public record GetProductsWithPaginationQuery : IRequest<PaginatedList<ProductDto>>
 {
-    public int CategoryId { get; init; }
+    public int? CategoryId { get; init; }
     public int PageNumber { get; init; } = 1;
     public int PageSize { get; init; } = 10;
 }
@@ -23,9 +23,12 @@ public class GetProductsWithPaginationQueryHandler : IRequestHandler<GetProducts
 
     public async Task<PaginatedList<ProductDto>> Handle(GetProductsWithPaginationQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Products
-            .Where(x => x.CategoryId == request.CategoryId)
-            .OrderBy(x => x.Created)
+        var query = _context.Products.AsQueryable();
+        if (request.CategoryId is not null)
+        {
+            query.Where(x => x.CategoryId == request.CategoryId);
+        }
+        return await query.OrderBy(x => x.Created)
             .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);
     }
